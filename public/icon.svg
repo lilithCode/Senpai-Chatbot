@@ -1,0 +1,14 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Dark Background -->
+  <rect width="32" height="32" rx="4" fill="#050508"/>
+  
+  <!-- The "A" Glyph -->
+  <path d="M16 6L26 26H21L16 16L11 26H6L16 6Z" fill="#00f3ff"/>
+  
+  <!-- Glitch Detail (Magenta) -->
+  <rect x="22" y="18" width="6" height="2" fill="#ff00ff" opacity="0.8"/>
+  
+  <!-- Sharp Border -->
+  <path d="M2 10V2H10" stroke="#00f3ff" stroke-width="1.5"/>
+  <path d="M30 22V30H22" stroke="#00f3ff" stroke-width="1.5"/>
+</svg>

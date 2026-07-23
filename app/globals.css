@@ -1,0 +1,103 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cyber-cyan: #00f3ff;
+  --color-cyber-magenta: #ff00ff;
+  --color-cyber-yellow: #fcee0a;
+}
+
+@layer base {
+  body {
+    @apply bg-black text-white/90 overflow-hidden font-mono selection:bg-cyber-cyan selection:text-black;
+    cursor: none !important;
+  }
+
+  @media (pointer: coarse) {
+    body {
+      cursor: auto !important;
+    }
+  }
+}
+
+@layer utilities {
+  .clip-chamfer-left {
+    clip-path: polygon(15% 0, 100% 0, 100% 100%, 0 100%);
+  }
+
+  .cyber-panel {
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(0, 243, 255, 0.2);
+  }
+
+  .cyber-glass {
+    @apply bg-black/60 backdrop-blur-xl border border-white/10 shadow-2xl;
+  }
+
+  .clip-chamfer {
+    clip-path: polygon(20px 0, 100% 0, 100% calc(100% - 20px),
+        calc(100% - 20px) 100%, 0 100%, 0 20px);
+  }
+
+  .clip-cyber {
+    clip-path: polygon(0 0, 92% 0, 100% 8%, 100% 100%, 8% 100%, 0 92%);
+  }
+
+  @media (max-width: 1024px) {
+    .clip-cyber {
+      clip-path: polygon(0 0, 95% 0, 100% 5%, 100% 100%, 5% 100%, 0 95%);
+    }
+
+    .clip-chamfer {
+      clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px),
+          calc(100% - 10px) 100%, 0 100%, 0 10px);
+    }
+  }
+
+  .clip-msg-bot {
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);
+  }
+
+  .clip-msg-user {
+    clip-path: polygon(15px 0, 100% 0, 100% 100%, 0 100%, 0 calc(100% - 15px));
+  }
+
+  .neon-border-cyan {
+    border: 1px solid rgba(0, 243, 255, 0.5);
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.15), inset 0 0 15px rgba(0, 243, 255, 0.05);
+  }
+
+  .neon-border-magenta {
+    border: 1px solid rgba(255, 0, 255, 0.5);
+    box-shadow: 0 0 15px rgba(255, 0, 255, 0.15), inset 0 0 15px rgba(255, 0, 255, 0.05);
+  }
+
+  .animate-spin-slow {
+    animation: spin 12s linear infinite;
+  }
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scrollbar-cyber::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .scrollbar-cyber::-webkit-scrollbar-thumb {
+    background: #00f3ff;
+    box-shadow: 0 0 10px #00f3ff;
+  }
+}
