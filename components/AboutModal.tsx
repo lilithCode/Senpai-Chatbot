@@ -69,7 +69,6 @@ export default function AboutModal({ isOpen, onClose, playSfx }: any) {
                   </h2>
                 </div>
               </div>
-
               <div className="space-y-6">
                 <div className="group bg-white/[0.03] p-4 border-l-2 border-cyber-cyan hover:bg-white/[0.06] transition-colors">
                   <p className="text-[13px] text-white/70 leading-relaxed font-medium">

@@ -5,7 +5,6 @@
   --color-cyber-magenta: #ff00ff;
   --color-cyber-yellow: #fcee0a;
 }
-
 @layer base {
   body {
     @apply bg-black text-white/90 overflow-hidden font-mono selection:bg-cyber-cyan selection:text-black;
