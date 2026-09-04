@@ -6,9 +6,24 @@ import {
   Activity,
   Github,
   Database,
-  SmileIcon,
   ExternalLink,
 } from "lucide-react";
+
+type Session = {
+  id: string;
+  name: string;
+  messages: { role: "user" | "assistant"; content: string }[];
+  date: string;
+};
+
+type RightPanelProps = {
+  playSfx: (type: string) => void;
+  history: Session[];
+  loadSession: (session: Session) => void;
+  activeSessionId: string | null;
+  openAbout: () => void;
+  isPlaying: boolean;
+};
 
 export default function RightPanel({
   playSfx,
@@ -17,7 +32,7 @@ export default function RightPanel({
   activeSessionId,
   openAbout,
   isPlaying,
-}: any) {
+}: RightPanelProps) {
   const platformLinks = [
     {
       name: "GitHub Repository",
@@ -75,7 +90,7 @@ export default function RightPanel({
               NO_LOGS_DETECTED
             </div>
           )}
-          {history.map((h: any) => (
+          {history.map((h) => (
             <button
               key={h.id}
               onClick={() => {

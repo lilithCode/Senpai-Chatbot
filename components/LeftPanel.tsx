@@ -3,13 +3,21 @@ import React, { useEffect, useRef } from "react";
 import { Play, Pause, Disc, AudioLines } from "lucide-react";
 import { TRACKS } from "./playlistData";
 
+type LeftPanelProps = {
+  isPlaying: boolean;
+  setIsPlaying: (isPlaying: boolean) => void;
+  currentTrack: number;
+  setCurrentTrack: (track: number | ((previous: number) => number)) => void;
+  playSfx?: (type: string) => void;
+};
+
 export default function LeftPanel({
   isPlaying,
   setIsPlaying,
   currentTrack,
   setCurrentTrack,
   playSfx,
-}: any) {
+}: LeftPanelProps) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
@@ -17,13 +25,17 @@ export default function LeftPanel({
     audioRef.current.volume = 0.1;
     audioRef.current.src = `/sfx/Playlist/${TRACKS[currentTrack].file}`;
     if (isPlaying) audioRef.current.play().catch(() => {});
-  }, [currentTrack]);
+  }, [currentTrack, isPlaying]);
 
   const togglePlay = () => {
     if (!audioRef.current) return;
-    isPlaying ? audioRef.current.pause() : audioRef.current.play();
+    if (isPlaying) {
+      audioRef.current.pause();
+    } else {
+      void audioRef.current.play();
+    }
     setIsPlaying(!isPlaying);
-    playSfx?.("send");
+    if (playSfx) playSfx("send");
   };
 
   return (
@@ -80,7 +92,7 @@ export default function LeftPanel({
                   } else {
                     togglePlay();
                   }
-                  playSfx?.("send");
+                  if (playSfx) playSfx("send");
                 }}
                 className={`w-full text-left text-[10px] lg:text-[11px] font-bold p-3 transition-all flex items-center justify-between group clip-chamfer border ${
                   isActive

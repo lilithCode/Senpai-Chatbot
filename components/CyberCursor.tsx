@@ -19,7 +19,7 @@ export default function CyberCursor() {
     };
     window.addEventListener("mousemove", move);
     return () => window.removeEventListener("mousemove", move);
-  }, [active]);
+  }, [active, mouseX, mouseY]);
 
   if (!active) return null;
 

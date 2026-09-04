@@ -8,6 +8,18 @@ import ChatPanel from "@/components/ChatPanel";
 import RightPanel from "@/components/RightPanel";
 import AboutModal from "@/components/AboutModal";
 
+type Message = {
+  role: "user" | "assistant";
+  content: string;
+};
+
+type Session = {
+  id: string;
+  name: string;
+  messages: Message[];
+  date: string;
+};
+
 export default function Home() {
   const[bootProgress, setBootProgress] = useState(0);
   const [isInitialized, setIsInitialized] = useState(false);
@@ -20,8 +32,8 @@ export default function Home() {
     "chat" | "left" | "right"
   >("chat");
 
-  const[messages, setMessages] = useState<any[]>([]);
-  const [history, setHistory] = useState<any[]>([]);
+  const[messages, setMessages] = useState<Message[]>([]);
+  const [history, setHistory] = useState<Session[]>([]);
   const [activeSessionId, setActiveSessionId] = useState<string | null>(null);
   const [input, setInput] = useState("");
 
@@ -60,7 +72,7 @@ export default function Home() {
     audio.play().catch(() => {});
   };
 
-  const loadSession = (session: any) => {
+  const loadSession = (session: Session) => {
     setActiveSessionId(session.id);
     setMessages(session.messages);
     playSfx("receive");
@@ -70,7 +82,7 @@ export default function Home() {
   const handleSend = async () => {
     if (!input.trim() || isLoading) return;
     const userText = input;
-    const userMsg = { role: "user", content: userText };
+    const userMsg: Message = { role: "user", content: userText };
     setMessages((prev) => [...prev, userMsg]);
     setInput("");
     playSfx("send");
@@ -83,7 +95,7 @@ export default function Home() {
         body: JSON.stringify({ messages:[...messages, userMsg] }),
       });
       const data = await response.json();
-      const assistantMsg = {
+      const assistantMsg: Message = {
         role: "assistant",
         content: data.reply || "SYSTEM_OFFLINE",
       };
@@ -111,7 +123,7 @@ export default function Home() {
           ),
         );
       }
-    } catch (error) {
+    } catch {
       setMessages((prev) => [
         ...prev,
         { role: "assistant", content: "[SYSTEM_ERROR]" },

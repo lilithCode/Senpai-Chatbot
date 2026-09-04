@@ -9,6 +9,22 @@ import {
 } from "lucide-react";
 import { useEffect, useRef } from "react";
 
+type Message = {
+  role: "user" | "assistant";
+  content: string;
+};
+
+type ChatPanelProps = {
+  messages: Message[];
+  input: string;
+  setInput: (value: string) => void;
+  handleSend: () => void;
+  startNewChat: () => void;
+  isLoading: boolean;
+  onToggleLeft: () => void;
+  onToggleRight: () => void;
+};
+
 // --- Moving Dots Animation Component ---
 const TypingDots = () => {
   return (
@@ -42,7 +58,7 @@ export default function ChatPanel({
   isLoading,
   onToggleLeft,
   onToggleRight,
-}: any) {
+}: ChatPanelProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -115,7 +131,7 @@ export default function ChatPanel({
         )}
 
         <AnimatePresence mode="popLayout">
-          {messages.map((msg: any, i: number) => (
+          {messages.map((msg, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 10 }}
