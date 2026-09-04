@@ -3,15 +3,20 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   X,
   Terminal,
-  Cpu,
-  Ghost,
-  Sparkles,
-  Coffee,
   Heart,
-  Zap,
 } from "lucide-react";
 
-export default function AboutModal({ isOpen, onClose, playSfx }: any) {
+type AboutModalProps = {
+  isOpen: boolean;
+  onClose: () => void;
+  playSfx: (type: string) => void;
+};
+
+export default function AboutModal({
+  isOpen,
+  onClose,
+  playSfx,
+}: AboutModalProps) {
   return (
     <AnimatePresence>
       {isOpen && (
@@ -87,13 +92,13 @@ export default function AboutModal({ isOpen, onClose, playSfx }: any) {
 
                 <div className="group bg-white/[0.03] p-4 border-l-2 border-cyber-magenta hover:bg-white/[0.06] transition-colors">
                   <p className="text-[11px] text-white/80 leading-relaxed italic">
-                    " If the grid starts feeling more real than the world
+                    &quot; If the grid starts feeling more real than the world
                     outside, then you’ve stayed too long. If my world ever feels{" "}
                     <span className="text-white font-black underline decoration-cyber-magenta/50">
-                      'off'
+                      &apos;off&apos;
                     </span>{" "}
                     to you, then maybe you’re
-                    just choosing to hear what you want to hear. "
+                    just choosing to hear what you want to hear. &quot;
                   </p>
                 </div>
               </div>
