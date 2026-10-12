@@ -101,7 +101,7 @@ Respond ONLY with JSON, no other text:
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          model: "gpt-4o-mini",
+          model: "openai/gpt-4o-mini",
           messages: [{ role: "user", content: routerPrompt }],
           temperature: 0,
         }),
